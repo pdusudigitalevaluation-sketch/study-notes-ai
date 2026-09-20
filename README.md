@@ -1,19 +1,24 @@
-# Study Notes AI — Online App
+# Study Notes AI — All-in-One
 
-This is a ready-to-deploy Next.js app. It keeps the OpenAI key on the server and sends uploaded study photos to the Responses API. The browser stores the resulting notes locally on the device.
+Features included in the web app:
+- Dashboard, study days, subjects, streak
+- Camera/gallery note scanning UI
+- AI structured notes API
+- Date-wise calendar/history
+- Notes library and search
+- AI revision interface
+- MCQ quiz
+- Flashcards
+- Exam planner
+- Settings
+- JSON export
+- Local browser storage
 
-## No coding deployment
-1. Create a GitHub account if needed.
-2. Create a new repository and upload ALL files/folders from this ZIP.
-3. In Vercel, choose Add New Project → Import the GitHub repository → Deploy.
-4. In Vercel Project Settings → Environment Variables, add:
-   OPENAI_API_KEY = your OpenAI API key
-5. Redeploy.
-6. Open the Vercel URL on your phone. Use Camera/Gallery.
+## Vercel setup
+1. Upload all root files to GitHub.
+2. Create an `api` folder and move `analyze.js` into it as `api/analyze.js`.
+3. Import the GitHub repo into Vercel.
+4. In Vercel Environment Variables add `OPENAI_API_KEY`.
+5. Deploy.
 
-The OpenAI key must stay server-side. Do not put it in browser code or a NEXT_PUBLIC_ variable.
-
-## Important
-OpenAI API usage is billed separately from ChatGPT subscriptions. Set an appropriate spending limit in your API account.
-
-Model used: gpt-5.6-luna (image input supported).
+The frontend works locally without an API key; AI photo conversion needs the environment variable.

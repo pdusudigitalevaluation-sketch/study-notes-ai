@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#5b4ce8">
+<title>Study Notes AI — All-in-One</title>
+<style>
+:root{--p:#5b4ce8;--p2:#7568ff;--bg:#f6f7fb;--card:#fff;--text:#18234a;--muted:#69738f;--line:#e5e8f0;--good:#20a46b;--warn:#f59e0b;--danger:#e05252}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
+button,input,textarea,select{font:inherit}button{cursor:pointer}
+.app{display:flex;min-height:100vh}.sidebar{width:250px;background:#fff;border-right:1px solid var(--line);padding:22px 15px;position:fixed;inset:0 auto 0 0;z-index:10}.brand{font-weight:900;font-size:22px;padding:8px 10px 25px}.brand span{color:var(--p)}.nav{border:0;background:transparent;width:100%;text-align:left;padding:12px 13px;border-radius:11px;margin:3px 0;color:#4d5875;font-weight:700}.nav:hover,.nav.active{background:#efedff;color:var(--p)}.nav .ico{display:inline-block;width:27px}.bottom{position:absolute;bottom:20px;left:15px;right:15px}
+.main{margin-left:250px;flex:1;padding:30px;max-width:1500px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:15px}.topbar h1{margin:0;font-size:29px}.topbar p{margin:5px 0;color:var(--muted)}.profile{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-weight:700}
+.page{display:none}.page.active{display:block}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:20px;box-shadow:0 7px 25px #27325c0a;margin-top:20px}.grid{display:grid;gap:16px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+.stat{padding:19px;border:1px solid var(--line);background:#fff;border-radius:15px}.stat .n{font-size:28px;font-weight:900;margin-top:8px}.muted{color:var(--muted)}.small{font-size:13px}
+.btn{border:0;border-radius:10px;padding:11px 16px;background:var(--p);color:#fff;font-weight:800}.btn.alt{background:#eef0f8;color:#34405e}.btn.good{background:var(--good)}.btn.warn{background:var(--warn)}.btn.danger{background:var(--danger)}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.between{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.upload{border:2px dashed #cdd2e3;border-radius:16px;padding:35px;text-align:center}.upload strong{font-size:18px}.preview{max-width:360px;max-height:250px;border-radius:12px;margin:15px auto;display:none}.loader{display:none;margin-top:15px;color:var(--p);font-weight:800}
+.note-list{margin-top:10px}.note-item{padding:15px 5px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:15px}.tag{display:inline-block;padding:4px 8px;border-radius:999px;background:#eeedff;color:var(--p);font-size:12px;font-weight:800}
+input,textarea,select{width:100%;padding:11px 12px;border:1px solid #dfe3ed;border-radius:10px;background:#fff;color:var(--text)}textarea{min-height:100px;resize:vertical}.field{margin:12px 0}.field label{display:block;font-weight:700;margin-bottom:6px}.hide{display:none}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.calhead,.calday{padding:10px;text-align:center}.calhead{font-size:12px;font-weight:800;color:var(--muted)}.calday{background:#fff;border:1px solid var(--line);border-radius:9px;min-height:60px;cursor:pointer}.calday.today{outline:2px solid var(--p)}.calday.has{background:#efedff;color:var(--p);font-weight:800}.calday.empty{background:transparent;border:0;cursor:default}.monthtitle{text-align:center;font-weight:900;margin:10px}
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:15px}.tab{border:1px solid var(--line);background:#fafbff;padding:9px 12px;border-radius:9px;font-weight:800}.tab.active{color:var(--p);border-color:#c8c3ff;background:#efedff}
+.quizq{border:1px solid var(--line);padding:16px;border-radius:13px;margin:12px 0}.option{display:block;padding:9px;margin:7px 0;background:#f7f8fc;border-radius:9px}.flash{min-height:220px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:25px;font-weight:900;border:2px dashed #cfd3e5;border-radius:16px;padding:30px}.progress{height:9px;background:#e8eaf2;border-radius:99px;overflow:hidden}.progress>div{height:100%;background:var(--p);width:0}
+.toast{position:fixed;right:20px;bottom:20px;background:#18234a;color:#fff;padding:13px 17px;border-radius:10px;display:none;z-index:30}
+@media(max-width:1000px){.g4{grid-template-columns:repeat(2,1fr)}.sidebar{width:210px}.main{margin-left:210px}}@media(max-width:700px){.sidebar{position:static;width:100%;height:auto}.app{display:block}.bottom{position:static;margin-top:10px}.main{margin:0;padding:16px}.g4,.g3,.g2{grid-template-columns:1fr}.topbar{align-items:flex-start}.topbar h1{font-size:23px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">📖 Study <span>Notes AI</span></div>
+  <button class="nav active" data-page="dashboard"><span class="ico">⌂</span>Dashboard</button>
+  <button class="nav" data-page="scan"><span class="ico">📷</span>Scan Notes</button>
+  <button class="nav" data-page="notes"><span class="ico">📝</span>My Notes</button>
+  <button class="nav" data-page="calendar"><span class="ico">📅</span>Calendar</button>
+  <button class="nav" data-page="revision"><span class="ico">🧠</span>AI Revision</button>
+  <button class="nav" data-page="quiz"><span class="ico">❓</span>MCQ Quiz</button>
+  <button class="nav" data-page="flashcards"><span class="ico">🃏</span>Flashcards</button>
+  <button class="nav" data-page="exam"><span class="ico">🎯</span>Exam Planner</button>
+  <button class="nav" data-page="search"><span class="ico">🔎</span>Search</button>
+  <div class="bottom"><button class="nav" data-page="settings"><span class="ico">⚙</span>Settings</button></div>
+</aside>
+<main class="main">
+<div class="topbar"><div><h1 id="pageTitle">Dashboard</h1><p id="pageSub">Your study activity at a glance.</p></div><div class="profile">👤 Student</div></div>
+
+<section id="dashboard" class="page active">
+  <div class="grid g4">
+    <div class="stat">📚 Notes<div class="n" id="statNotes">0</div></div>
+    <div class="stat">📅 Study Days<div class="n" id="statDays">0</div></div>
+    <div class="stat">🔥 Streak<div class="n" id="statStreak">0</div></div>
+    <div class="stat">🎯 Subjects<div class="n" id="statSubjects">0</div></div>
+  </div>
+  <div class="grid g2">
+    <div class="card"><div class="between"><h2>Today's Study</h2><button class="btn" onclick="showPage('scan')">+ Add</button></div><div id="todayNotes"></div></div>
+    <div class="card"><h2>Weekly Activity</h2><div id="weekly"></div></div>
+  </div>
+  <div class="card"><div class="between"><h2>Recent Notes</h2><button class="btn alt" onclick="showPage('notes')">View all</button></div><div id="recent"></div></div>
+</section>
+
+<section id="scan" class="page">
+  <div class="card">
+    <div class="tabs"><button class="tab active">📷 Camera / Gallery</button><button class="tab">📄 Multi-page</button><button class="tab">✍️ Manual Note</button></div>
+    <div class="upload">
+      <strong>Scan your handwritten or book notes</strong><br><span class="muted">AI will organize headings, key points, definitions, formulas and revision points.</span>
+      <input id="photo" type="file" accept="image/*" capture="environment" hidden>
+      <div><button class="btn" onclick="photo.click()">Choose / Take Photo</button></div>
+      <img id="preview" class="preview">
+      <div id="loader" class="loader">🤖 AI is reading your notes…</div>
+    </div>
+    <div class="grid g3" style="margin-top:18px">
+      <div class="field"><label>Subject</label><input id="subject" placeholder="e.g. Physics"></div>
+      <div class="field"><label>Topic</label><input id="topic" placeholder="e.g. Motion"></div>
+      <div class="field"><label>Date</label><input id="noteDate" type="date"></div>
+    </div>
+    <div class="field"><label>Optional instruction</label><textarea id="instruction" placeholder="e.g. Explain difficult parts in simple Hindi-English."></textarea></div>
+    <button class="btn good" onclick="analyzePhoto()">✨ Create AI Notes</button>
+    <button class="btn alt" onclick="saveDemoNote()">Save Demo Note</button>
+  </div>
+</section>
+
+<section id="notes" class="page"><div class="card"><div class="between"><h2>My Notes</h2><button class="btn" onclick="showPage('scan')">+ New Note</button></div><div id="allNotes"></div></div></section>
+
+<section id="calendar" class="page"><div class="card"><div class="between"><button class="btn alt" onclick="changeMonth(-1)">←</button><div class="monthtitle" id="monthTitle"></div><button class="btn alt" onclick="changeMonth(1)">→</button></div><div class="calendar" id="calendarGrid"></div><div class="card" id="selectedDay"></div></div></section>
+
+<section id="revision" class="page"><div class="card"><h2>🧠 AI Revision</h2><p class="muted">Choose a note and generate quick revision material.</p><div class="field"><select id="revisionNote"></select></div><div class="row"><button class="btn" onclick="revisionAction('simple')">Explain Simply</button><button class="btn" onclick="revisionAction('summary')">Quick Revision</button><button class="btn" onclick="revisionAction('questions')">Important Questions</button></div><div id="revisionResult"></div></div></section>
+
+<section id="quiz" class="page"><div class="card"><div class="between"><h2>❓ MCQ Quiz</h2><button class="btn alt" onclick="makeQuiz()">New Quiz</button></div><p class="muted">A local demo quiz is generated from your saved notes. Full AI quiz generation is available when the API is connected.</p><div id="quizBox"></div></div></section>
+
+<section id="flashcards" class="page"><div class="card"><h2>🃏 Flashcards</h2><div class="field"><select id="flashNote"></select></div><div class="flash" id="flashCard">Choose a note, then start.</div><div class="row" style="margin-top:15px"><button class="btn" onclick="startFlash()">Start</button><button class="btn alt" onclick="nextFlash()">Next</button><button class="btn alt" onclick="flipFlash()">Flip</button></div></div></section>
+
+<section id="exam" class="page"><div class="card"><h2>🎯 Exam Planner</h2><div class="grid g3"><div class="field"><label>Exam</label><input id="examName" placeholder="Semester Exam"></div><div class="field"><label>Exam Date</label><input id="examDate" type="date"></div><div class="field"><label>Target</label><input id="examTarget" placeholder="e.g. 80%"></div></div><div class="field"><label>Subjects (comma separated)</label><input id="examSubjects" placeholder="Physics, Maths, Biology"></div><button class="btn" onclick="createPlan()">Create Revision Plan</button><div id="plan"></div></div></section>
+
+<section id="search" class="page"><div class="card"><h2>🔎 Search Notes</h2><input id="searchBox" placeholder="Search topic, subject, keywords…" oninput="renderSearch()"><div id="searchResults"></div></div></section>
+
+<section id="settings" class="page"><div class="card"><h2>⚙ Settings</h2><div class="field"><label>Student name</label><input id="studentName" placeholder="Student"></div><div class="field"><label>Preferred language</label><select id="lang"><option>English</option><option>Hindi + English</option><option>Hindi</option></select></div><button class="btn" onclick="saveSettings()">Save Settings</button><hr style="border:0;border-top:1px solid var(--line);margin:25px 0"><h3>Data</h3><button class="btn alt" onclick="exportData()">Export Notes JSON</button> <button class="btn danger" onclick="clearAll()">Delete Local Data</button><p class="small muted">Cloud login, Google backup and push notifications need account/database setup in the online production version.</p></div></section>
+
+</main></div><div class="toast" id="toast"></div>
+
+<script>
+const KEY='studyNotesAI.v3';
+let state=JSON.parse(localStorage.getItem(KEY)||'{"notes":[],"settings":{"name":"Student","lang":"English"}}');
+let viewDate=new Date(), selectedDate=new Date(), flash={items:[],i:0,front:true}, quiz=[];
+const titles={dashboard:['Dashboard','Your study activity at a glance.'],scan:['Scan Notes','Turn study photos into structured AI notes.'],notes:['My Notes','All saved study material.'],calendar:['Study Calendar','See exactly what you studied each day.'],revision:['AI Revision','Turn notes into quick revision material.'],quiz:['MCQ Quiz','Practice what you studied.'],flashcards:['Flashcards','Remember definitions and key concepts.'],exam:['Exam Planner','Build a revision plan around your exam date.'],search:['Search','Find anything inside your notes.'],settings:['Settings','Personalize your study workspace.']};
+function save(){localStorage.setItem(KEY,JSON.stringify(state));}
+function toast(x){const t=document.getElementById('toast');t.textContent=x;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
+function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.page===id));document.getElementById('pageTitle').textContent=titles[id][0];document.getElementById('pageSub').textContent=titles[id][1];renderAll();}
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function today(){return new Date().toISOString().slice(0,10)}
+function saveNote(n){n.id=Date.now();n.date=n.date||today();state.notes.unshift(n);save();renderAll();toast('Note saved ✓')}
+function saveDemoNote(){saveNote({title:document.getElementById('topic').value||'New Study Note',subject:document.getElementById('subject').value||'General',summary:'Clean study summary generated from your uploaded material.',keyPoints:['Main concept','Important definition','Revision point'],formulas:['Add formulas here'],revision:['Review this topic again'],original:null})}
+photo.onchange=()=>{const f=photo.files[0];if(!f)return;preview.src=URL.createObjectURL(f);preview.style.display='block'}
+async function analyzePhoto(){
+ if(!photo.files[0]){toast('Choose a photo first');return}
+ loader.style.display='block';
+ const fd=new FileReader();fd.onload=async()=>{
+   try{
+    const r=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image:fd.result,subject:subject.value,topic:topic.value,date:noteDate.value||today(),instruction:instruction.value})});
+    if(!r.ok)throw new Error('AI API not connected');
+    const n=await r.json();n.original=fd.result;saveNote(n);loader.style.display='none';showPage('notes');
+   }catch(e){loader.style.display='none';toast('AI connection not ready — saved demo note instead');saveDemoNote()}
+ };fd.readAsDataURL(photo.files[0])
+}
+function renderAll(){renderDashboard();renderNotes();renderCalendar();renderSelects();renderSearch();renderWeekly()}
+function renderDashboard(){statNotes.textContent=state.notes.length;statDays.textContent=new Set(state.notes.map(n=>n.date)).size;statSubjects.textContent=new Set(state.notes.map(n=>n.subject||'General')).size;let dates=new Set(state.notes.map(n=>n.date)),d=new Date(),st=0;for(let i=0;i<365;i++){let x=new Date(d);x.setDate(d.getDate()-i);if(dates.has(x.toISOString().slice(0,10)))st++;else if(i)break}statStreak.textContent=st;let tn=state.notes.filter(n=>n.date===today());todayNotes.innerHTML=tn.length?tn.map(n=>noteHTML(n)).join(''):'<p class="muted">No notes today. Start with Scan Notes.</p>';recent.innerHTML=state.notes.slice(0,5).map(n=>noteHTML(n)).join('')||'<p class="muted">No notes yet.</p>'}
+function noteHTML(n){return `<div class="note-item"><div><b>${esc(n.title)}</b> <span class="tag">${esc(n.subject||'General')}</span><br><span class="small muted">${esc(n.date)} · ${esc(n.summary||'')}</span></div><button class="btn alt" onclick="openNote(${n.id})">Open</button></div>`}
+function renderNotes(){allNotes.innerHTML=state.notes.map(n=>noteHTML(n)).join('')||'<p class="muted">Your notes will appear here.</p>'}
+function openNote(id){let n=state.notes.find(x=>x.id===id);if(!n)return;document.getElementById('selectedDay').innerHTML=`<h2>${esc(n.title)}</h2><p><span class="tag">${esc(n.subject)}</span> · ${esc(n.date)}</p><h3>Summary</h3><p>${esc(n.summary)}</p><h3>Key Points</h3><ul>${(n.keyPoints||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul><h3>Formulas / Definitions</h3><ul>${(n.formulas||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul><h3>Revision</h3><ul>${(n.revision||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;showPage('calendar');selectedDate=new Date(n.date);renderCalendar()}
+function renderCalendar(){let y=viewDate.getFullYear(),m=viewDate.getMonth(),names=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];monthTitle.textContent=viewDate.toLocaleString('en',{month:'long',year:'numeric'});calendarGrid.innerHTML=names.map(x=>`<div class="calhead">${x}</div>`).join('');let first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();for(let i=0;i<first;i++)calendarGrid.innerHTML+='<div class="calday empty"></div>';for(let d=1;d<=days;d++){let ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`,has=state.notes.some(n=>n.date===ds),tod=ds===today();calendarGrid.innerHTML+=`<div class="calday ${has?'has':''} ${tod?'today':''}" onclick="dayClick('${ds}')">${d}${has?' 📚':''}</div>`}}
+function dayClick(ds){selectedDate=new Date(ds);let ns=state.notes.filter(n=>n.date===ds);selectedDay.innerHTML=`<h2>${ds}</h2>${ns.length?ns.map(noteHTML).join(''):'<p class="muted">No study notes on this day.</p>'}`}
+function changeMonth(n){viewDate.setMonth(viewDate.getMonth()+n);renderCalendar()}
+function renderSelects(){let opts=state.notes.map(n=>`<option value="${n.id}">${esc(n.title)}</option>`).join('');revisionNote.innerHTML=opts||'<option>No notes yet</option>';flashNote.innerHTML=opts||'<option>No notes yet</option>'}
+function revisionAction(type){let n=state.notes.find(x=>x.id==revisionNote.value);if(!n){revisionResult.innerHTML='<p>No note yet.</p>';return}let text=type==='simple'?`<h3>Simple Explanation</h3><p>${esc(n.summary)}</p>`:type==='summary'?`<h3>Quick Revision</h3><ul>${(n.keyPoints||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:`<h3>Important Questions</h3><ol>${(n.keyPoints||[]).map(x=>`<li>Explain: ${esc(x)}</li>`).join('')}</ol>`;revisionResult.innerHTML=`<div class="card">${text}</div>`}
+function makeQuiz(){let n=state.notes.find(x=>x.id==revisionNote.value)||state.notes[0];if(!n){quizBox.innerHTML='<p>Add a note first.</p>';return}let pts=n.keyPoints||['Main concept'];quiz=pts.slice(0,5).map((p,i)=>({q:`Which statement is related to this topic?`,a:p,opts:[p,'Unrelated detail','Random fact','None of these']}));quizBox.innerHTML=quiz.map((q,i)=>`<div class="quizq"><b>${i+1}. ${q.q}</b>${q.opts.map((o,j)=>`<label class="option"><input type="radio" name="q${i}" value="${j}"> ${esc(o)}</label>`).join('')}</div>`).join('')+`<button class="btn good" onclick="gradeQuiz()">Submit Quiz</button><div id="score"></div>`}
+function gradeQuiz(){let s=0;quiz.forEach((q,i)=>{let x=document.querySelector(`input[name=q${i}]:checked`);if(x&&+x.value===0)s++});score.innerHTML=`<div class="card"><h2>Score: ${s}/${quiz.length}</h2><p>${s===quiz.length?'Excellent! 🎉':'Review the notes and try again.'}</p></div>`}
+function startFlash(){let n=state.notes.find(x=>x.id==flashNote.value);flash.items=(n?.keyPoints||[]).map((x,i)=>({front:`Key Point ${i+1}`,back:x}));flash.i=0;flash.front=true;drawFlash()}
+function drawFlash(){if(!flash.items.length){flashCard.textContent='No key points available.';return}let x=flash.items[flash.i];flashCard.textContent=flash.front?x.front:x.back}
+function flipFlash(){flash.front=!flash.front;drawFlash()}function nextFlash(){if(flash.items.length){flash.i=(flash.i+1)%flash.items.length;flash.front=true;drawFlash()}}
+function renderSearch(){let q=(searchBox.value||'').toLowerCase();let ns=state.notes.filter(n=>(n.title+' '+n.subject+' '+n.summary+' '+(n.keyPoints||[]).join(' ')).toLowerCase().includes(q));searchResults.innerHTML=ns.map(noteHTML).join('')||'<p class="muted">No matching notes.</p>'}
+function renderWeekly(){let days=[];for(let i=6;i>=0;i--){let d=new Date();d.setDate(d.getDate()-i);let ds=d.toISOString().slice(0,10),c=state.notes.filter(n=>n.date===ds).length;days.push(`<div style="margin:10px 0"><div class="between"><b>${d.toLocaleDateString('en',{weekday:'short'})}</b><span>${c} notes</span></div><div class="progress"><div style="width:${Math.min(c*25,100)}%"></div></div></div>`)}weekly.innerHTML=days.join('')}
+function createPlan(){let subs=examSubjects.value.split(',').map(x=>x.trim()).filter(Boolean),date=examDate.value;if(!subs.length||!date){toast('Enter subjects and exam date');return}plan.innerHTML=`<div class="card"><h3>${esc(examName.value||'Exam')} — ${esc(date)}</h3>${subs.map((s,i)=>`<div class="note-item"><b>${esc(s)}</b><span>Day ${i+1}: Learn → Practice → Revise</span></div>`).join('')}<p class="muted">Suggested cycle: first pass → active recall → MCQs → final revision.</p></div>`}
+function saveSettings(){state.settings.name=studentName.value||'Student';state.settings.lang=lang.value;save();toast('Settings saved ✓')}
+function exportData(){let b=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='study-notes-backup.json';a.click()}
+function clearAll(){if(confirm('Delete all local notes?')){localStorage.removeItem(KEY);location.reload()}}
+function init(){noteDate.value=today();studentName.value=state.settings.name;lang.value=state.settings.lang;document.querySelectorAll('.nav').forEach(x=>x.onclick=()=>showPage(x.dataset.page));renderAll()}
+init();
+</script>
+</body></html>

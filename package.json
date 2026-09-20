@@ -1,7 +1,1 @@
-{
-  "name":"study-notes-ai",
-  "version":"1.0.0",
-  "private":true,
-  "scripts":{"dev":"next dev","build":"next build","start":"next start"},
-  "dependencies":{"next":"latest","react":"latest","react-dom":"latest"}
-}
+{"name":"study-notes-ai-all-in-one","version":"1.0.0","private":true}
